@@ -23,6 +23,7 @@ function utente(){
         tableRow.appendChild(tableD)
     }
     table.appendChild(tableRow)
+    localStorage.setItem("utenti")
 }
 
 

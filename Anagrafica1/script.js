@@ -30,4 +30,8 @@ function invia(){
     localStorage.setItem("tabella","valore")
 }
 
+function invia2(){
+    consol.log("si")
+    
+}
 

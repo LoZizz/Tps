@@ -27,7 +27,7 @@ function utente(){
 }
 
 function invia(){
-    localStorage.setItem("chiave","valore")
+    localStorage.setItem("tabella","valore")
 }
 
 

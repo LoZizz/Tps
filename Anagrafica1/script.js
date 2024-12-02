@@ -23,15 +23,5 @@ function utente(){
         tableRow.appendChild(tableD)
     }
     table.appendChild(tableRow)
-    localStorage.setItem("utenti")
+    localStorage.setItem("utenti","valore")
 }
-
-function invia(){
-    localStorage.setItem("tabella","valore")
-}
-
-function invia2(){
-    consol.log("si")
-    
-}
-

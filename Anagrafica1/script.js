@@ -26,4 +26,8 @@ function utente(){
     localStorage.setItem("utenti")
 }
 
+function invia(){
+    localStorage.setItem("chiave","valore")
+}
+
 

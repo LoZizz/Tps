@@ -23,5 +23,5 @@ function utente(){
         tableRow.appendChild(tableD)
     }
     table.appendChild(tableRow)
-    localStorage.setItem("utenti","valore")
+    localStorage.setItem("utenti",valore)
 }

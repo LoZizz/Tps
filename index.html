@@ -1,17 +1,52 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
+    
   <style>
     
   </style>
 </head>
 <body>
-  <ul>
-    <li><a href=" https://lozizz.github.io/Tps/Anagrafica1"><b>Anagrafica</b></a></li>
-  </ul>
+    <button type="button" onclick="ricevi">ricevi</button>
+
+  <table class="table">
+    <thead>
+        <tr>
+            <th>Nome</th>
+            <th>Cognome</th>
+            <th>Indirizzo</th>
+            <th>Città</th>
+        </tr>
+    </thead>
+    <tbody id="tabella">
+        <!-- tabella vuota, da riempire -->
+    </tbody>
+</table>
+
 </body>
   
 <script>
+    function ricevi(){
+        let utente  = localStorage.getItem("utenti");
+        alert(utente);
+        /*
+        let cognome  = localStorage.getItem("cognome");
+        let indirizzo  = localStorage.getItem("indirizzo");
+        let citta  = localStorage.getItem("citta");
+
+        let tabella= document.getElementById("tabella");
+        let riga= document.createElement("tr");
+        let utente = [nome, cognome, indirizo, citta];
+
+        for (let i = 0; i<utente.length; i++){
+            let colonna = document.createElement("td");
+            colonna.innerHTML = utente[i];
+            riga.appendChild(colonna);
+
+        }
+        tabella.appendChild(riga);*/
+    }
+
 
 </script>
 </html>

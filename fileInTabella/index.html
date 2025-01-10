@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Compito</title>
+
+    <style>
+        body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        }
+        table {
+        border-collapse: collapse;
+        margin-top: 20px;
+        }
+        th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        }
+        </style>
+</head>
+
+<body style="text-align: center;">
+
+    <div>
+        <form>
+            <input type="file" id="fileInserito" onchange="leggiFile()">
+            <br>
+            <br>
+            <input type="button" value="Carica file" onclick="tabella()">
+        </form>
+    </div>
+
+        <div>
+            <table>
+                <thead >
+                    <tr id="intab">
+                    </tr>
+                </thead>
+                <tbody id="tabella">
+
+                </tbody>
+                </table>
+        </div>
+
+</body>
+  <script src="script.js"></script>
+</html>

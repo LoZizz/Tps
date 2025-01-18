@@ -2,4 +2,4 @@
 Compiti di Tps
 
 # Sito
-https://lozizz.github.io/Tps/
+https://lozizz.github.io/Tps/lista

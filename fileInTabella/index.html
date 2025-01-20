@@ -25,6 +25,13 @@
 </head>
 
 <body style="text-align: center;">
+
+    <div>
+        <form>
+            <input type="file" id="fileInserito" onchange="leggiFile(), grafico()">
+        </form>
+    </div>
+
     <canvas id="canvas" width="500" height="500" style="border:ipx solid grey"></canvas>
 
      const canvas = document.getElementById("canvas");
@@ -34,13 +41,6 @@
   
       ctx.moveTo(250,0);
       ctx.lineTo(190,200);
-
-    <div>
-        <form>
-            <input type="file" id="fileInserito" onchange="leggiFile(), tabella()">
-        </form>
-    </div>
-
         <div>
             <table>
                 <thead >

@@ -12,7 +12,19 @@ function leggiFile() {
 }
 
 function grafico(){
-    let righe = 
+    
+        
+    <canvas id="canvas" width="500" height="500" style="border:ipx solid grey"></canvas>
+
+     const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+  
+      ctx.beginPath();
+  
+      ctx.moveTo(250,0);
+    for i in risultato{ 
+      ctx.lineTo(190,risultato[i]);
+    }
 }
 
 function tabella() {

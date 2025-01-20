@@ -1,52 +1,58 @@
 <!DOCTYPE html>
 <html lang="it">
 <head>
-    
-  <style>
-    
-  </style>
-</head>
-<body>
-    <button type="button" onclick="ricevi">ricevi</button>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stella</title>
 
-  <table class="table">
-    <thead>
-        <tr>
-            <th>Nome</th>
-            <th>Cognome</th>
-            <th>Indirizzo</th>
-            <th>Città</th>
-        </tr>
-    </thead>
-    <tbody id="tabella">
-        <!-- tabella vuota, da riempire -->
-    </tbody>
-</table>
+    <style>
+        body {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin: 0;
+        }
+        table {
+        border-collapse: collapse;
+        margin-top: 20px;
+        }
+        th, td {
+        border: 1px solid black;
+        padding: 8px;
+        text-align: center;
+        }
+        </style>
+</head>
+
+<body>
+
+    <canvas id="canvas" width="500" height="500" style="border:ipx solid grey"></canvas>
+
+    <script>
+    
+      const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+  
+      ctx.beginPath();
+  
+      ctx.moveTo(250,0);
+      ctx.lineTo(190,200);
+      ctx.lineTo(0,200);
+      ctx.lineTo(150,300);
+      ctx.lineTo(100,500);
+      ctx.lineTo(250,360);
+      ctx.lineTo(400,500);
+      ctx.lineTo(350,300);
+      ctx.lineTo(500,200);
+      ctx.lineTo(310,200);
+      ctx.lineTo(250,0);
+  
+      ctx.strokeStyle = "purple";
+  
+      ctx.stroke();
+  
+    </script>
 
 </body>
   
-<script>
-    function ricevi(){
-        let utente  = localStorage.getItem("utenti");
-        alert(utente);
-        /*
-        let cognome  = localStorage.getItem("cognome");
-        let indirizzo  = localStorage.getItem("indirizzo");
-        let citta  = localStorage.getItem("citta");
-
-        let tabella= document.getElementById("tabella");
-        let riga= document.createElement("tr");
-        let utente = [nome, cognome, indirizo, citta];
-
-        for (let i = 0; i<utente.length; i++){
-            let colonna = document.createElement("td");
-            colonna.innerHTML = utente[i];
-            riga.appendChild(colonna);
-
-        }
-        tabella.appendChild(riga);*/
-    }
-
-
-</script>
 </html>

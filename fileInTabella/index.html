@@ -27,12 +27,17 @@
 <body style="text-align: center;">
     <canvas id="canvas" width="500" height="500" style="border:ipx solid grey"></canvas>
 
+     const canvas = document.getElementById("canvas");
+      const ctx = canvas.getContext("2d");
+  
+      ctx.beginPath();
+  
+      ctx.moveTo(250,0);
+      ctx.lineTo(190,200);
+
     <div>
         <form>
-            <input type="file" id="fileInserito" onchange="leggiFile()">
-            <br>
-            <br>
-            <input type="button" value="Carica file" onclick="tabella()">
+            <input type="file" id="fileInserito" onchange="leggiFile(), tabella()">
         </form>
     </div>
 

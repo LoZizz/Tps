@@ -11,6 +11,10 @@ function leggiFile() {
     };
 }
 
+function grafico(){
+    let righe = 
+}
+
 function tabella() {
     let nome = risultato.split("\n")
     let categorie = nome[0].split(",")

@@ -8,14 +8,14 @@ function leggiFile() {
     
     lettore.onload = function() {
         let csv = lettore.result;
-        risultato = csv.split("\n").map(row => row.split(","));
+        risultato = csv.split("\n").map(row => row.split(",").map(Number));
         grafico();
     };
 }
 
 function grafico() {
     let labels = risultato[0];
-    let data = risultato.slice(1).map(row => row.map(Number));
+    let data = risultato.slice(1);
     
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');

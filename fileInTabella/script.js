@@ -1,51 +1,56 @@
-let risultato = []
+let risultato = [];
 function leggiFile() {
     let file = document.getElementById("fileInserito").files[0];
-  
+    
     let lettore = new FileReader();
-  
+    
     lettore.readAsText(file);
-  
+    
     lettore.onload = function() {
-      risultato = lettore.result;
+        let csv = lettore.result;
+        risultato = csv.split("\n").map(row => row.split(","));
+        grafico();
     };
 }
 
-function grafico(){
+function grafico() {
+    let labels = risultato[0];
+    let data = risultato.slice(1).map(row => row.map(Number));
     
-        
-    <canvas id="canvas" width="500" height="500" style="border:ipx solid grey"></canvas>
+    let canvas = document.getElementById('canvas');
+    let ctx = canvas.getContext('2d');
+    
+    ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
-     const canvas = document.getElementById("canvas");
-      const ctx = canvas.getContext("2d");
-  
-      ctx.beginPath();
-  
-      ctx.moveTo(250,0);
-    for i in risultato{ 
-      ctx.lineTo(190,risultato[i]);
-    }
-}
+    let maxDataValue = Math.max(...data.flat());
+    let padding = 50;
+    let graphHeight = canvas.height - 2 * padding;
+    let graphWidth = canvas.width - 2 * padding;
+    let stepX = graphWidth / (labels.length - 1);
+    let stepY = graphHeight / maxDataValue;
 
-function tabella() {
-    let nome = risultato.split("\n")
-    let categorie = nome[0].split(",")
-    for (let i in categorie) {
-        let th = document.createElement("th")
-        th.innerHTML = categorie[i].replaceAll('"', '')
-        document.getElementById("intab").append(th)
+    // Draw axes
+    ctx.beginPath();
+    ctx.moveTo(padding, padding);
+    ctx.lineTo(padding, canvas.height - padding);
+    ctx.lineTo(canvas.width - padding, canvas.height - padding);
+    ctx.stroke();
+
+    // Draw labels
+    for (let i = 0; i < labels.length; i++) {
+        ctx.fillText(labels[i], padding + i * stepX, canvas.height - padding + 20);
     }
-    for (let i in nome) {
-        if (i!=0) {
-            const data = nome[i].replaceAll('"', '')
-            let colonne = nome[i].split(",")
-            const tableRow = document.createElement("tr")
-            for (let i = 0; i<colonne.length; i++) {
-                const table = document.createElement("td")
-                table.innerHTML = colonne[i].replaceAll('"', '')
-                tableRow.appendChild(table)
-            }
-            document.getElementById("tabella").appendChild(tableRow)
+
+    // Draw data
+    data.forEach((row, rowIndex) => {
+        ctx.beginPath();
+        ctx.moveTo(padding, canvas.height - padding - row[0] * stepY);
+        for (let i = 1; i < row.length; i++) {
+            ctx.lineTo(padding + i * stepX, canvas.height - padding - row[i] * stepY);
         }
-    }
+        ctx.strokeStyle = `hsl(${(rowIndex * 360) / data.length}, 100%, 50%)`;
+        ctx.stroke();
+    });
 }
+
+document.getElementById("fileInserito").addEventListener("change", leggiFile);

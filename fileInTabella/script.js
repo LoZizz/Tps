@@ -8,21 +8,21 @@ function leggiFile() {
     
     lettore.onload = function() {
         let csv = lettore.result;
-        risultato = csv.split("\n").map(row => row.split(",").map(Number));
+        risultato = csv.split("\n").map(row => row.split(","));
         grafico();
     };
 }
 
 function grafico() {
     let labels = risultato[0];
-    let data = risultato.slice(1);
+    let data = risultato.slice(1).map(row => row.map(Number));
     
     let canvas = document.getElementById('canvas');
     let ctx = canvas.getContext('2d');
     
     ctx.clearRect(0, 0, canvas.width, canvas.height); // Clear the canvas
 
-    let maxDataValue = Math.max(...data.flat());
+    let maxDataValue = Math.max(...data.flat().filter(n => !isNaN(n)));
     let padding = 50;
     let graphHeight = canvas.height - 2 * padding;
     let graphWidth = canvas.width - 2 * padding;
@@ -46,7 +46,9 @@ function grafico() {
         ctx.beginPath();
         ctx.moveTo(padding, canvas.height - padding - row[0] * stepY);
         for (let i = 1; i < row.length; i++) {
-            ctx.lineTo(padding + i * stepX, canvas.height - padding - row[i] * stepY);
+            if (!isNaN(row[i])) {
+                ctx.lineTo(padding + i * stepX, canvas.height - padding - row[i] * stepY);
+            }
         }
         ctx.strokeStyle = `hsl(${(rowIndex * 360) / data.length}, 100%, 50%)`;
         ctx.stroke();

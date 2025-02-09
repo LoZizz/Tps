@@ -1,38 +1,75 @@
+
 <!DOCTYPE html>
 <html lang="it">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stella</title>
-
-    <style>
-        body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        }
-        table {
-        border-collapse: collapse;
-        margin-top: 20px;
-        }
-        th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-        }
-        </style>
-</head>
-
-<body>
-
-    <canvas id="canvas" width="500" height="500" style="border:ipx solid grey"></canvas>
-
+    <title>Cifrario di Cesare</title>
     <script>
-    
-  
-    </script>
+        function cifra() {
+            var testo = document.getElementById("testo").value;
+            var chiave = parseInt(document.getElementById("chiave").value);
+            var risultato = "";
 
+            for (var i = 0; i < testo.length; i++) {
+                var char = testo[i];
+                if (char.match(/[a-z]/i)) {
+                    var codice = char.charCodeAt(0);
+                    var base = codice >= 65 && codice <= 90 ? 65 : 97;
+                    risultato += String.fromCharCode(((codice - base + chiave) % 26) + base);
+                } else {
+                    risultato += char; // Non cifrare caratteri non alfabetici
+                }
+            }
+
+            localStorage.setItem("testoCifrato", risultato);
+            document.getElementById("risultatoCifrato").innerText = risultato;
+        }
+
+        function decifra() {
+            var chiave = parseInt(document.getElementById("chiaveDecifra").value);
+            var testoCifrato = localStorage.getItem("testoCifrato");
+            var risultato = "";
+
+            if (testoCifrato) {
+                for (var i = 0; i < testoCifrato.length; i++) {
+                    var char = testoCifrato[i];
+                    if (char.match(/[a-z]/i)) {
+                        var codice = char.charCodeAt(0);
+                        var base = codice >= 65 && codice <= 90 ? 65 : 97;
+                        risultato += String.fromCharCode(((codice - base - chiave + 26) % 26) + base); // Decifra
+                    } else {
+                        risultato += char; // Non decifrare caratteri non alfabetici
+                    }
+                }
+                document.getElementById("risultatoDecifrato").innerText = risultato;
+            } else {
+                alert("Nessun testo cifrato disponibile!");
+            }
+        }
+    </script>
+</head>
+<body>
+    <h1>Cifrario di Cesare</h1>
+
+    <h2>Cifratura</h2>
+    <label for="testo">Testo da cifrare:</label>
+    <input type="text" id="testo" required>
+    <br>
+    <label for="chiave">Chiave (numero di posizioni):</label>
+    <input type="number" id="chiave" value="3" required>
+    <br>
+    <button onclick="cifra()">Cifra</button>
+    <h2>Risultato Cifrato:</h2>
+    <p id="risultatoCifrato"></p>
+
+    <h2>Decifratura</h2>
+    <label for="chiaveDecifra">Chiave per decifrare:</label>
+    <input type="number" id="chiaveDecifra" value="3" required>
+    <br>
+    <button onclick="decifra()">Decifra</button>
+    <h2>Risultato Decifrato:</h2>
+    <p id="risultatoDecifrato"></p>
 </body>
-  
 </html>
+

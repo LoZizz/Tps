@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Tabella Migranti</title>
+</head>
+<body>
+<h1>grafico migranti</h1>
+<label for="File_csv">Inserire file</label>
+<input type="file" id="File_csv" name="File_csv" accept=".csv" onchange="caricaFile()">
+<br><br>
+<table id="tabella">
+  <thead></thead>
+  <tbody></tbody>
+</table>
+<canvas id="canva" width="1000" height="600"></canvas>
+<script>
+const anni = [];
+const sbarchi = [];
+
+function caricaFile() {
+  const input = document.getElementById("File_csv");
+  let file = input.files[0];
+  let reader = new FileReader();
+  reader.readAsText(file);
+  reader.onload = function() {
+    let risultato = reader.result;
+    riempiTabella(risultato);
+  };
+}
+
+function riempiTabella(data) {
+  const dataSplit = data.split("\n");
+  const tableBody = document.getElementById("tabella").getElementsByTagName('tbody')[0];
+
+  for (let i = 1; i < dataSplit.length; i++) {
+    const colonne = dataSplit[i].split(",");
+    let anno = parseInt(colonne[0].replace(/"/g, '')); //Rimuove le virgolette
+    let numSbarchi = parseInt(colonne[1].replace(/"/g, '')); //Rimuove le virgolette
+    anni.push(anno);
+    sbarchi.push(numSbarchi);
+
+    let riga = tableBody.insertRow();
+    let cellaAnno = riga.insertCell();
+    let cellaSbarchi = riga.insertCell();
+    cellaAnno.textContent = anno;
+    cellaSbarchi.textContent = numSbarchi;
+  }
+  grafico(anni, sbarchi);
+}
+
+function grafico(anni, sbarchi) {
+  var canvas = document.getElementById("canva");
+  var context = canvas.getContext("2d");
+  let x = canvas.width;
+  let y = canvas.height;
+
+  // Trova il valore massimo per scalare l'asse y
+  let maxSbarchi = Math.max(...sbarchi);
+
+  // Margini 
+  let margineSinistro = 50;
+  let margineDestro = 50;
+  let margineAlto = 50;
+  let margineBasso = 50;
+
+  let scalaX = (x - margineSinistro - margineDestro) / (anni.length -1);
+  let scalaY = (y - margineAlto - margineBasso) / maxSbarchi;
+
+  context.beginPath();
+  context.moveTo(margineSinistro, y - margineBasso);
+
+  for (let i = 0; i < anni.length; i++) {
+    let xCoord = margineSinistro + i * scalaX;
+    let yCoord = y - margineBasso - sbarchi[i] * scalaY;
+    context.lineTo(xCoord, yCoord);
+  }
+  context.stroke();
+}
+</script>
+</body>
+</html>

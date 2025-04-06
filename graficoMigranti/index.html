@@ -4,13 +4,13 @@
 <title>Tabella Migranti</title>
 </head>
 <body>
-<h1>grafico migranti</h1>
-<label for="File_csv">Inserire file</label>
+<h1>Tabella Migranti 2</h1>
+<label for="File_csv">Inserisci il file CSV:</label>
 <input type="file" id="File_csv" name="File_csv" accept=".csv" onchange="caricaFile()">
 <br><br>
-<table id="tabella">
-  <thead></thead>
-  <tbody></tbody>
+<table id="tabella" style="border-collapse: collapse; width: 50%; margin: 20px auto; border: 2px solid #007bff; /* Blu */">
+  <thead style="background-color: sandybrown; border-bottom: 2px solid #007bff;"></thead>
+  <tbody style="text-align: center;"></tbody>
 </table>
 <canvas id="canva" width="1000" height="600"></canvas>
 <script>

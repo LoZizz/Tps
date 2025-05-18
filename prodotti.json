@@ -1,0 +1,32 @@
+{
+    "prodotti": [
+        {
+            "marca": "Samsung",
+            "modello": "S23",
+            "prezzo": 899.99,
+            "ram": 8,
+            "hd": 256,
+            "fotocamera": 108,
+            "immagine": "samsung_s23.avif"
+        },
+        {
+            "marca": "Apple",
+            "modello": "iPhone 14",
+            "prezzo": 1099.99,
+            "ram": 6,
+            "hd": 128,
+            "fotocamera": 48,
+            "immagine": "iPhone_14.png"
+        },
+        {
+            "marca": "Google",
+            "modello": "Pixel 7",
+            "prezzo": 799.99,
+            "ram": 8,
+            "hd": 128,
+            "fotocamera": 50,
+            "immagine": "google_pixel7.jpg"
+        }
+    ]
+  }
+  

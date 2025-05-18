@@ -2,57 +2,20 @@
 <html lang="it">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Stella</title>
-
-    <style>
-        body {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin: 0;
-        }
-        table {
-        border-collapse: collapse;
-        margin-top: 20px;
-        }
-        th, td {
-        border: 1px solid black;
-        padding: 8px;
-        text-align: center;
-        }
-        </style>
+    <title>Login</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-
-    <canvas id="canvas" width="500" height="500" style="border:ipx solid grey"></canvas>
-
-    <script>
-    
-      const canvas = document.getElementById("canvas");
-      const ctx = canvas.getContext("2d");
-  
-      ctx.beginPath();
-  
-      ctx.moveTo(250,0);
-      ctx.lineTo(190,200);
-      ctx.lineTo(0,200);
-      ctx.lineTo(150,300);
-      ctx.lineTo(100,500);
-      ctx.lineTo(250,360);
-      ctx.lineTo(400,500);
-      ctx.lineTo(350,300);
-      ctx.lineTo(500,200);
-      ctx.lineTo(310,200);
-      ctx.lineTo(250,0);
-  
-      ctx.strokeStyle = "purple";
-  
-      ctx.stroke();
-  
-    </script>
-
+    <div class="container">
+        <h2>Login</h2>
+        <input type="email" id="email" placeholder="Email">
+        <input type="password" id="password" placeholder="Password">   
+        <input type="file" id="json-file" accept=".json">
+        <div class="button-container">
+            <button onclick="login();">Accedi</button>
+        </div>
+        <p>Non hai un account? <a href="register.html">Registrati</a></p>
+    </div>
+    <script src="script.js"></script>
 </body>
-  
 </html>

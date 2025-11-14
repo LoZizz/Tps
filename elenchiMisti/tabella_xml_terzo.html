@@ -59,22 +59,22 @@
     </table>
   <button onclick="location.href='index_terzo.html'">Ritorno pagina iniziale</button>
 <script>
-var contenuto_tabella = [];
+let contenuto_tabella = [];
 
 function leggi() {
     const file = document.getElementById('fileInput').files[0];
     const fileURL = URL.createObjectURL(file); // cercato
 
-    var req = new XMLHttpRequest();
+    let req = new XMLHttpRequest();
     req.open("GET", fileURL, false);
     req.send();
 
-    var xml = req.responseXML;
-    var persone = xml.getElementsByTagName("persona");
+    let xml = req.responseXML;
+    let persone = xml.getElementsByTagName("persona");
     contenuto_tabella = [];
 
-    for (var i = 0; i < persone.length; i++) {
-        var p = persone[i];
+    for (let i = 0; i < persone.length; i++) {
+        let p = persone[i];
         contenuto_tabella.push({
             nome: p.getElementsByTagName("nome")[0].textContent,
             cognome: p.getElementsByTagName("cognome")[0].textContent,
@@ -88,12 +88,12 @@ function leggi() {
 }
 
 function popola() {
-    var tabella = document.getElementById("tabella");
+    let tabella = document.getElementById("tabella");
     tabella.innerHTML = "";
 
-    for (var i = 0; i < contenuto_tabella.length; i++) {
-        var persona = contenuto_tabella[i];
-        var row = tabella.insertRow();
+    for (let i = 0; i < contenuto_tabella.length; i++) {
+        let persona = contenuto_tabella[i];
+        let row = tabella.insertRow();
         row.insertCell(0).textContent = persona.nome;
         row.insertCell(1).textContent = persona.cognome;
         row.insertCell(2).textContent = persona.indirizzo;
@@ -104,3 +104,4 @@ function popola() {
 </script>
 </body>
 </html>
+

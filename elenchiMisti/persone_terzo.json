@@ -1,0 +1,4 @@
+[
+  { "nome": "Mario", "cognome": "Rossi", "indirizzo": "Via Roma 10", "citta": "Milano", "cap": "20100" },
+  { "nome": "Luca", "cognome": "Bianchi", "indirizzo": "Via Milano 20", "citta": "Torino", "cap": "10100" }
+]

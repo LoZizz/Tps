@@ -1,0 +1,16 @@
+<persone>
+  <persona>
+    <nome>Mario</nome>
+    <cognome>Rossi</cognome>
+    <indirizzo>Via Roma 10</indirizzo>
+    <citta>Milano</citta>
+    <cap>20100</cap>
+  </persona>
+  <persona>
+    <nome>Luca</nome>
+    <cognome>Bianchi</cognome>
+    <indirizzo>Via Milano 20</indirizzo>
+    <citta>Torino</citta>
+    <cap>10100</cap>
+  </persona>
+</persone>

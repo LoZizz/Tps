@@ -2,20 +2,7 @@
     <body>
         <p id="message"></p>
         <input type="button" value="premi" onclick="leggi()">
-    <script>
-        function leggi() {
-            const req = new XMLHttpRequest();
-            req.open("GET",'recupero.json',true);
-            req.send();
-            req.onload = function(){
-                const json = JSON.parse(req.responseText);
-                document.getElementById("message").innerHTML = JSON.stringify(json);
-            };
-        };
-        consol.log(json);
-
-        <br><br>
-      <table>
+        <table>
       <thread>
         <tr>
           <td>ID</td>
@@ -33,19 +20,34 @@
         </tbody>
       
       </table>
+        </body>
 
+    <script>
+        function leggi() {
+            const req = new XMLHttpRequest();
+            req.open("GET",'recupero.json',true);
+            req.send();
+            req.onload = function(){
+                const json = JSON.parse(req.responseText);
+                document.getElementById("message").innerHTML = JSON.stringify(json);
+            };
+        };
+        consol.log(json);
+
+
+      
 
         let vettoreDati = [];
 
 function riempiTabella() {
     
-   let id = document.getElementById("id").value;
-  let name = document.getElementById("nome").value;
+    let id = document.getElementById("id").value;
+  let nome = document.getElementById("nome").value;
   let marca = document.getElementById("marca").value;
   let prezzo = document.getElementById("prezzo").value;
   let disponibile = document.getElementById("disponibile").value;
   
-  vettoreDati.push([name, surname, address, city]);
+  vettoreDati.push([id, nome, marca, prezzo, disponibile]);
   
   let tabella = document.getElementById("tabella").getElementsByTagName("tbody")[0];
   
@@ -62,5 +64,5 @@ function riempiTabella() {
   vettoreDati = [];
 
     </script>
-    </body>
+    
 </html>

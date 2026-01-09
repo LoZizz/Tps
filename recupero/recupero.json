@@ -1,0 +1,23 @@
+[
+  {
+    "id": 1,
+    "nome": "Smartphone X100",
+    "marca": "TechOne",
+    "prezzo": 699.99,
+    "disponibile": true
+  },
+  {
+    "id": 2,
+    "nome": "Laptop Pro 15",
+    "marca": "CompTech",
+    "prezzo": 1299.00,
+    "disponibile": false
+  },
+  {
+    "id": 3,
+    "nome": "Tablet Air",
+    "marca": "SmartDevices",
+    "prezzo": 499.50,
+    "disponibile": true
+  }
+]

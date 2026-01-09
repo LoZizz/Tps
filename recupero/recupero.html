@@ -34,6 +34,33 @@
       
       </table>
 
+
+        let vettoreDati = [];
+
+function riempiTabella() {
+  
+  
+  let name = document.getElementById("nome").value;
+  let surname = document.getElementById("cognome").value;
+  let address = document.getElementById("indirizzo").value;
+  let city = document.getElementById("citta").value;
+  
+  vettoreDati.push([name, surname, address, city]);
+  
+  let tabella = document.getElementById("tabella").getElementsByTagName("tbody")[0];
+  
+  vettoreDati.forEach(function(dati) {
+                const row = document.createElement('tr');
+                dati.forEach(function(valore) {
+                    const td = document.createElement('td');
+                    td.textContent = valore;
+                    row.appendChild(td);
+                });
+                tabella.appendChild(row);
+            });
+
+  vettoreDati = [];
+
     </script>
     </body>
 </html>

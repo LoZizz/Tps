@@ -1,68 +1,60 @@
-<html>
-    <body>
-        <p id="message"></p>
-        <input type="button" value="premi" onclick="leggi()">
-        <table>
-      <thread>
+<!DOCTYPE html>
+<html lang="it">
+<head>
+    <meta charset="UTF-8">
+    <title>Tabella JSON</title>
+</head>
+<body>
+
+<p id="message"></p>
+<input type="button" value="Premi" onclick="leggi()">
+
+<table border="1" id="tabella">
+    <thead>
         <tr>
-          <td>ID</td>
-          <td>NOME</td>
-          <td>MARCA</td>
-          <td>PREZZO</td>
-            <td>DISPONIBILE</td>
+            <th>ID</th>
+            <th>NOME</th>
+            <th>MARCA</th>
+            <th>PREZZO</th>
+            <th>DISPONIBILE</th>
         </tr>
-        </thread>
-      </table>
-      <table id="tabella">
-        
-        <tbody>
-          
-        </tbody>
-      
-      </table>
-        </body>
+    </thead>
+    <tbody></tbody>
+</table>
 
-    <script>
-        function leggi() {
-            const req = new XMLHttpRequest();
-            req.open("GET",'recupero.json',true);
-            req.send();
-            req.onload = function(){
-                const json = JSON.parse(req.responseText);
-                document.getElementById("message").innerHTML = JSON.stringify(json);
-            };
-        };
-        consol.log(json);
+<script>
+function leggi() {
+    const req = new XMLHttpRequest();
+    req.open("GET", "recupero.json", true);
+    req.send();
 
+    req.onload = function () {
+        const dati = JSON.parse(req.responseText);
+        document.getElementById("message").textContent = "Dati caricati";
 
-      
+        riempiTabella(dati);
+    };
+}
 
-        let vettoreDati = [];
+function riempiTabella(vettoreDati) {
+    const tbody = document.querySelector("#tabella tbody");
+    tbody.innerHTML = ""; // pulisce la tabella
 
-function riempiTabella() {
-    
-    let id = document.getElementById("id").value;
-  let nome = document.getElementById("nome").value;
-  let marca = document.getElementById("marca").value;
-  let prezzo = document.getElementById("prezzo").value;
-  let disponibile = document.getElementById("disponibile").value;
-  
-  vettoreDati.push([id, nome, marca, prezzo, disponibile]);
-  
-  let tabella = document.getElementById("tabella").getElementsByTagName("tbody")[0];
-  
-  vettoreDati.forEach(function(dati) {
-                const row = document.createElement('tr');
-                dati.forEach(function(valore) {
-                    const td = document.createElement('td');
-                    td.textContent = valore;
-                    row.appendChild(td);
-                });
-                tabella.appendChild(row);
-            });
+    vettoreDati.forEach(oggetto => {
+        const tr = document.createElement("tr");
 
-  vettoreDati = [];
+        tr.innerHTML = `
+            <td>${oggetto.id}</td>
+            <td>${oggetto.nome}</td>
+            <td>${oggetto.marca}</td>
+            <td>${oggetto.prezzo}</td>
+            <td>${oggetto.disponibile}</td>
+        `;
 
-    </script>
-    
+        tbody.appendChild(tr);
+    });
+}
+</script>
+
+</body>
 </html>

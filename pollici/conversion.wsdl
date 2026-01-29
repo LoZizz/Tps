@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<definitions name="ConversionService"
+             targetNamespace="http://example.com/conversion"
+             xmlns:tns="http://example.com/conversion"
+             xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/"
+             xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+             xmlns="http://schemas.xmlsoap.org/wsdl/">
+
+  <types>
+    <xsd:schema targetNamespace="http://example.com/conversion">
+      <xsd:element name="convert" type="tns:ConvertRequest"/>
+      <xsd:element name="convertResponse" type="tns:ConvertResponse"/>
+
+      <xsd:complexType name="ConvertRequest">
+        <xsd:sequence>
+          <xsd:element name="value" type="xsd:float"/>
+          <xsd:element name="conversionType" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+
+      <xsd:complexType name="ConvertResponse">
+        <xsd:sequence>
+          <xsd:element name="result" type="xsd:float"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </types>
+
+  <message name="convertRequest">
+    <part name="parameters" element="tns:convert"/>
+  </message>
+  <message name="convertResponse">
+    <part name="parameters" element="tns:convertResponse"/>
+  </message>
+
+  <portType name="ConversionPortType">
+    <operation name="convert">
+      <input message="tns:convertRequest"/>
+      <output message="tns:convertResponse"/>
+    </operation>
+  </portType>
+
+  <binding name="ConversionBinding" type="tns:ConversionPortType">
+    <soap:binding style="rpc" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <operation name="convert">
+      <soap:operation soapAction="convert"/>
+      <input>
+        <soap:body use="encoded" namespace="http://example.com/conversion" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </input>
+      <output>
+        <soap:body use="encoded" namespace="http://example.com/conversion" encodingStyle="http://schemas.xmlsoap.org/soap/encoding/"/>
+      </output>
+    </operation>
+  </binding>
+
+  <service name="ConversionService">
+    <port name="ConversionPort" binding="tns:ConversionBinding">
+      <soap:address location="http://localhost/conversion_soap/conversion_server.php"/>
+    </port>
+  </service>
+</definitions>

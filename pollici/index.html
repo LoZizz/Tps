@@ -1,49 +1,53 @@
 <!DOCTYPE html>
-<html>
+<html lang="it">
 <head>
+    <meta charset="UTF-8">
     <title>Conversione SOAP</title>
 </head>
 <body>
-    <h1>Conversione SOAP</h1>
-    <form id="conversionForm">
-        <label for="value">Valore:</label>
-        <input type="number" id="value" name="value" required>
-        <br><br>
-        <label for="type">Tipo di conversione:</label>
-        <select id="type" name="type" required>
-            <option value="celsius_to_fahrenheit">Celsius a Fahrenheit</option>
-            <option value="fahrenheit_to_celsius">Fahrenheit a Celsius</option>
-            <option value="meters_to_feet">Metri a piedi</option>
-            <option value="feet_to_meters">Piedi a metri</option>
-        </select>
-        <br><br>
-        <button type="submit">Converti</button>
-    </form>
-    <h2>Risultato: <span id="result"></span></h2>
 
-    <script>
-        document.getElementById('conversionForm').addEventListener('submit', function(e) {
-            e.preventDefault();
+<h1>Conversione SOAP</h1>
 
-            const value = parseFloat(document.getElementById('value').value);
-            const type = document.getElementById('type').value;
+<form id="conversionForm">
+    <label>Valore:</label>
+    <input type="number" id="value" step="any" required>
+    <br><br>
 
-            fetch('do_action.php', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({value: value, type: type})
-            })
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('result').textContent = data.result;
-            })
-            .catch(error => {
-                document.getElementById('result').textContent = 'Errore nella richiesta';
-                console.error('Errore:', error);
-            });
-        });
-    </script>
+    <label>Tipo di conversione:</label>
+    <select id="type" required>
+        <option value="celsius_to_fahrenheit">Celsius → Fahrenheit</option>
+        <option value="fahrenheit_to_celsius">Fahrenheit → Celsius</option>
+        <option value="meters_to_feet">Metri → Piedi</option>
+        <option value="feet_to_meters">Piedi → Metri</option>
+    </select>
+    <br><br>
+
+    <button type="submit">Converti</button>
+</form>
+
+<h2>Risultato: <span id="result"></span></h2>
+
+<script>
+document.getElementById('conversionForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+
+    const value = parseFloat(document.getElementById('value').value);
+    const type = document.getElementById('type').value;
+
+    fetch('do_action.php', {
+        method: 'POST',
+        headers: {'Content-Type': 'application/json'},
+        body: JSON.stringify({value, type})
+    })
+    .then(res => res.json())
+    .then(data => {
+        document.getElementById('result').textContent = data.result;
+    })
+    .catch(() => {
+        document.getElementById('result').textContent = 'Errore nella richiesta';
+    });
+});
+</script>
+
 </body>
 </html>

@@ -1,30 +1,35 @@
 <?php
 // conversion_server.php
 
-// Funzione di conversione
-function convert($value, $type) {
+function convert($params) {
+
+    $value = $params->value;
+    $type  = $params->conversionType;
+
     switch (strtolower($type)) {
         case 'celsius_to_fahrenheit':
-            return ($value * 9/5) + 32;
+            $result = ($value * 9 / 5) + 32;
+            break;
+
         case 'fahrenheit_to_celsius':
-            return ($value - 32) * 5/9;
+            $result = ($value - 32) * 5 / 9;
+            break;
+
         case 'meters_to_feet':
-            return $value * 3.28084;
+            $result = $value * 3.28084;
+            break;
+
         case 'feet_to_meters':
-            return $value / 3.28084;
+            $result = $value / 3.28084;
+            break;
+
         default:
-            throw new Exception("Tipo di conversione sconosciuto");
+            throw new SoapFault("Client", "Tipo di conversione sconosciuto");
     }
+
+    return ['result' => $result];
 }
 
-// Creare il server SOAP
 $server = new SoapServer("conversion.wsdl");
-
 $server->addFunction("convert");
-
-try {
-    $server->handle();
-} catch (Exception $e) {
-    echo "Errore: " . $e->getMessage();
-}
-?>
+$server->handle();

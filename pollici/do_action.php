@@ -1,33 +1,30 @@
 <?php
-// do_action.php
-
-// Imposta l'header come JSON
 header('Content-Type: application/json');
 
-// Ottieni i dati JSON inviati
-$input = json_decode(file_get_contents('php://input'), true);
+$data = json_decode(file_get_contents("php://input"), true);
 
-if (!isset($input['value']) || !isset($input['type'])) {
+if (!isset($data['value']) || !isset($data['type'])) {
     echo json_encode(['result' => 'Dati mancanti']);
     exit;
 }
 
-$value = $input['value'];
-$type = $input['type'];
+$wsdl = "http://localhost/conversion_soap/conversion.wsdl";
 
-// Percorso del WSDL
-$wsdl_url = "http://https://lozizz.github.io/Tps/pollici/conversion.wsdl";
-
-// Creare il client SOAP
 try {
-    $client = new SoapClient($wsdl_url);
+    $client = new SoapClient($wsdl, [
+        'trace' => true,
+        'cache_wsdl' => WSDL_CACHE_NONE
+    ]);
+
     $params = [
-        'value' => $value,
-        'conversionType' => $type
+        'value' => $data['value'],
+        'conversionType' => $data['type']
     ];
-    $response = $client->convert($params);
+
+    $response = $client->__soapCall("convert", [$params]);
+
     echo json_encode(['result' => $response->result]);
+
 } catch (Exception $e) {
     echo json_encode(['result' => 'Errore: ' . $e->getMessage()]);
 }
-?>

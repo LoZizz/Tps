@@ -16,7 +16,7 @@ $value = $input['value'];
 $type = $input['type'];
 
 // Percorso del WSDL
-$wsdl_url = "http://localhost/conversion_soap/conversion.wsdl";
+$wsdl_url = "http://https://lozizz.github.io/Tps/pollici/conversion.wsdl";
 
 // Creare il client SOAP
 try {
